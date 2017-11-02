@@ -492,9 +492,10 @@ class TestPool(tb.ConnectedTestCase):
         methods = [test_fetch, test_fetchrow, test_fetchval,
                    test_execute, test_execute_with_arg]
 
-        for method in methods:
-            with self.subTest(method=method.__name__):
-                await run(200, method)
+        with tb.silence_asyncio_long_exec_warning():
+            for method in methods:
+                with self.subTest(method=method.__name__):
+                    await run(200, method)
 
     async def test_pool_connection_execute_many(self):
         async def worker(pool):

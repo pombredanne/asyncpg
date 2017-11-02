@@ -183,7 +183,7 @@ class Cluster:
             # Make sure server certificate key file has correct permissions.
             keyfile = os.path.join(self._data_dir, 'srvkey.pem')
             shutil.copy(ssl_key, keyfile)
-            os.chmod(keyfile, 0o400)
+            os.chmod(keyfile, 0o600)
             server_settings = server_settings.copy()
             server_settings['ssl_key_file'] = keyfile
 
